@@ -13,8 +13,6 @@ WORKDIR /app
 
 COPY ["pyproject.toml", "poetry.lock", "/app/"]
 
-VOLUME ["/redis", "/rabbitmq", "/mongodb", "run.log", "/config_dir"]
-
 RUN poetry config virtualenvs.in-project true && \
     poetry install --all-extras --no-root && rm -rf $POETRY_CACHE_DIR
 
