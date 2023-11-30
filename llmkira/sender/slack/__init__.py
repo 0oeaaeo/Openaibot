@@ -556,7 +556,7 @@ class SlackBotRunner(Runner):
                 return await create_task(event_, funtion_enable=__default_function_enable__)
 
         @bot.event("message")
-        async def listen_im(event_):
+        async def listen_im(event):
             """
             自动响应私聊消息
             """
