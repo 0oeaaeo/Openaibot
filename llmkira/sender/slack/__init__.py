@@ -514,11 +514,11 @@ class SlackBotRunner(Runner):
             """
             自动响应群组消息
             """
-            if not event_.text:
+            if not event_["text"]:
                 return None
             if not await validate_join(event_=event_):
                 return None
-            _text = event_.text
+            _text = event_["text"]
             # 扳机
             trigger = await get_trigger_loop(
                 platform_name=__sender__,
@@ -561,14 +561,14 @@ class SlackBotRunner(Runner):
             自动响应私聊消息
             """
 
-            if not event.text:
+            if not event["text"]:
                 return None
-            if event.channel_type == "im":
-                return await deal_group(event_)
-            if event.channel_type == "group":
-                return await deal_group(event_)
-            if event.channel_type == "channel":
-                return await deal_group(event_)
+            if event["channel_type"] == "im":
+                return await deal_group(event)
+            if event["channel_type"] == "group":
+                return await deal_group(event)
+            if event["channel_type"] == "channel":
+                return await deal_group(event)
 
         _self_get = await self.client.auth_test()
         logger.success(f"SlackBot init, bot_id:{_self_get}")
