@@ -561,13 +561,13 @@ class SlackBotRunner(Runner):
             自动响应私聊消息
             """
 
-            if not event_.text:
+            if not event.text:
                 return None
-            if event_.channel_type == "im":
+            if event.channel_type == "im":
                 return await deal_group(event_)
-            if event_.channel_type == "group":
+            if event.channel_type == "group":
                 return await deal_group(event_)
-            if event_.channel_type == "channel":
+            if event.channel_type == "channel":
                 return await deal_group(event_)
 
         _self_get = await self.client.auth_test()
