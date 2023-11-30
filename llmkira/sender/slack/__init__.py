@@ -561,12 +561,6 @@ class SlackBotRunner(Runner):
             自动响应私聊消息
             """
 
-            _logger.info(_event)
-            event_: SlackMessageEvent = SlackMessageEvent.model_validate(_event)
-            # 校验消息是否过期
-            if int(float(event_.event_ts)) < int(time.time()) - 60 * 60 * 5:
-                _logger.warning(f"slack: message expired {event_.event_ts}")
-                return
             if not event_.text:
                 return None
             if event_.channel_type == "im":
