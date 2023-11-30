@@ -1,4 +1,4 @@
-# -*- coding: utf-8 -*-
+a# -*- coding: utf-8 -*-
 # @Time    : 2023/10/21 下午2:09
 # @Author  : sudoskys
 # @File    : __init__.py.py
@@ -555,20 +555,13 @@ class SlackBotRunner(Runner):
             if f"<@{BotSetting.bot_id}>" in _text or _text.endswith(f"<@{BotSetting.bot_id}>"):
                 return await create_task(event_, funtion_enable=__default_function_enable__)
 
-        @bot.event("message")
-        async def listen_im(event):
+        @bot.message("!chat")
+        async def chat(event):
             """
             自动响应私聊消息
             """
+            return await create_task(event, funtion_enable=__default_function_enable__)
 
-            if not event["text"]:
-                return None
-            if event["channel_type"] == "im":
-                return await deal_group(event)
-            if event["channel_type"] == "group":
-                return await deal_group(event)
-            if event["channel_type"] == "channel":
-                return await deal_group(event)
 
         _self_get = await self.client.auth_test()
         logger.success(f"SlackBot init, bot_id:{_self_get}")
